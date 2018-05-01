@@ -47,7 +47,7 @@ deploy:
   description: 'Prebuilt LLVM Libraries'
   
   auth_token:
-    secure: 74609dc6c4c18d995bd4396b003800ce5421c6a8
+    secure: gWlzgye105VNmou/HMlSGAfUaVyDnPrS+CfGEGwfa36wfl15JFtJOwh7jOf6Tx3m
   artifact: C:\rpcs3\bin\llvmlibs.7z
   draft: false
   prerelease: false
