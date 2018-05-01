@@ -41,15 +41,18 @@ after_build:
   - 7z a -t7z -m0=lzma2 -mx=9 -aoa -r "llvmlibs.7z" *
   - mkdir C:\rpcs3\bin
   - move .\llvmlibs.7z C:\rpcs3\bin\
+
+artifacts:
+    - path: C:\rpcs3\bin\*.7z
+      name: llvmlibs
+    
 deploy:
   provider: GitHub
   release: continuous
   description: 'Prebuilt LLVM Libraries'
-  
+  artifact: llvmlibs
   auth_token:
     secure: gWlzgye105VNmou/HMlSGAfUaVyDnPrS+CfGEGwfa36wfl15JFtJOwh7jOf6Tx3m
-  artifacts:
-    - path: C:\rpcs3\bin\llvmlibs.7z
   draft: false
   prerelease: false
   force_update: true
