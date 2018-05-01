@@ -38,7 +38,7 @@ after_build:
   - xcopy  "..\..\llvm_build\include" ".\include" /E
   - xcopy  "..\..\llvm_build\lib" ".\lib" /E
   - cd ..\
-  - 7z a -r "llvmlibs.7z" *
+  - 7z a -t7z -m0=lzma2 -mx=9 -aoa -r "llvmlibs.7z" *
   - mkdir C:\rpcs3\bin
   - move .\llvmlibs.7z C:\rpcs3\bin\
 deploy:
@@ -48,7 +48,8 @@ deploy:
   
   auth_token:
     secure: gWlzgye105VNmou/HMlSGAfUaVyDnPrS+CfGEGwfa36wfl15JFtJOwh7jOf6Tx3m
-  artifact: C:\rpcs3\bin\llvmlibs.7z
+  artifacts:
+    - path: C:\rpcs3\bin\llvmlibs.7z
   draft: false
   prerelease: false
   force_update: true
