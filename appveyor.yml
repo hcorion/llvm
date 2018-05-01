@@ -43,7 +43,7 @@ after_build:
   - move .\llvmlibs.7z C:\rpcs3\bin\
 
 artifacts:
-    - path: C:\rpcs3\bin\*.7z
+    - path: ..\bin\*.7z
       name: llvmlibs
     
 deploy:
