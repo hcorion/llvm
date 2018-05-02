@@ -34,9 +34,12 @@ after_build:
   - mkdir Release
   - mkdir include
   - mkdir lib
+  - cd lib
+  - mkdir cmake
+  - cd ..\
   - xcopy "..\..\llvm_build\Release" ".\Release" /E
   - xcopy  "..\..\llvm_build\include" ".\include" /E
-  - xcopy  "..\..\llvm_build\lib" ".\lib" /E
+  - xcopy  "..\..\llvm_build\lib\cmake" ".\lib\cmake" /E
   - cd ..\
   - 7z a -t7z -m0=lzma2 -mx=9 -aoa -r "llvmlibs.7z" *
   - move .\llvmlibs.7z C:\rpcs3\llvm\
@@ -47,7 +50,7 @@ artifacts:
     
 deploy:
   provider: GitHub
-  release: continuous
+  release: continuous-$(APPVEYOR_REPO_BRANCH)
   description: 'Prebuilt LLVM Libraries'
   artifact: llvmlibs
   auth_token:
