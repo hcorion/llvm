@@ -39,11 +39,10 @@ after_build:
   - xcopy  "..\..\llvm_build\lib" ".\lib" /E
   - cd ..\
   - 7z a -t7z -m0=lzma2 -mx=9 -aoa -r "llvmlibs.7z" *
-  - mkdir C:\rpcs3\bin
-  - move .\llvmlibs.7z C:\rpcs3\bin\
+  - move .\llvmlibs.7z C:\rpcs3\llvm\
 
 artifacts:
-    - path: ..\bin\*.7z
+    - path: *.7z
       name: llvmlibs
     
 deploy:
