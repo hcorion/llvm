@@ -2,7 +2,7 @@ language: c++
 
 before_script:
     - mkdir build ; cd build
-    - cmake .. -G Ninja -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_TYPE=Release -DLLVM_BUILD_RUNTIME=OFF  -DLLVM_BUILD_TOOLS=OFF  -DLLVM_INCLUDE_DOCS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF
+    - CC=clang CXX=clang++ cmake .. -G Ninja -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_TYPE=Release -DLLVM_BUILD_RUNTIME=OFF  -DLLVM_BUILD_TOOLS=OFF  -DLLVM_INCLUDE_DOCS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF
 
 script:
     - cmake --build .
