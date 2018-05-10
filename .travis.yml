@@ -21,7 +21,7 @@ deploy:
         tags: false
 addons:
     apt:
-        source:
+        sources:
             - llvm-toolchain-trusty-6.0
         packages:
             - binutils
