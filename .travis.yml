@@ -24,5 +24,4 @@ addons:
         packages:
             - binutils
             - clang
-            - libstdc++-5-dev
             - ninja-build
