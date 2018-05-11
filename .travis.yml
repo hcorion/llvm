@@ -22,8 +22,10 @@ deploy:
 addons:
     apt:
         sources:
+            - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-6.0
         packages:
-            - binutils
+            - cmake
+            - libstdc++-5-dev
             - clang-6.0
             - ninja-build
