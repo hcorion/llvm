@@ -13,7 +13,8 @@ after_script:
     # Actually deploy now
     - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
     - chmod +x ./upload.sh
-    - UPLOADTOOL_SUFFIX=$TRAVIS_BRANCH ./upload.sh ./llvmlibs-linux.tar.gz
+    - export UPLOADTOOL_SUFFIX=linux-${TRAVIS_BRANCH}
+    - ./upload.sh ./llvmlibs-linux.tar.gz
 addons:
     apt:
         sources:
