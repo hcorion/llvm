@@ -12,6 +12,7 @@ after_script:
     - tar -czf llvmlibs-linux.tar.gz lib include
     # Actually deploy now
     - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+    - chmod +x ./upload.sh
     - UPLOADTOOL_SUFFIX=$TRAVIS_BRANCH ./upload.sh ./llvmlibs-linux.tar.gz
 addons:
     apt:
