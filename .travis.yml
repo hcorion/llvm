@@ -13,7 +13,7 @@ after_script:
     - DESTDIR=./dest ninja install
     - cd dest
     - tar -czf llvmlibs-linux.tar.gz lib include bin
-    - sha256sum ./llvmlibs-linux.tar.gz | awk '{ print $1}'
+    - sha256sum ./llvmlibs-linux.tar.gz | awk '{ print $1}' >> llvmlibs-linux.tar.gz.sha256
     - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
     - export UPLOADTOOL_SUFFIX=linux-release_60
     - bash upload.sh ./llvmlibs-linux*
