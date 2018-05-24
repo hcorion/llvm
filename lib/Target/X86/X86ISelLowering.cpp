@@ -1776,9 +1776,9 @@ EVT X86TargetLowering::getSetCCResultType(const DataLayout &DL,
     if (LegalVT.getSimpleVT().isVector() && Subtarget.hasVLX()) {
       // If we legalized to less than a 512-bit vector, then we will use a vXi1
       // compare for vXi32/vXi64 for sure. If we have BWI we will also support
-      // vXi16/vXi8.
+      // vXi16/vXi8 (disabled).
       MVT EltVT = LegalVT.getSimpleVT().getVectorElementType();
-      if (Subtarget.hasBWI() || EltVT.getSizeInBits() >= 32)
+      if (EltVT.getSizeInBits() >= 32)
         return EVT::getVectorVT(Context, MVT::i1, NumElts);
     }
   }
@@ -17847,8 +17847,7 @@ static SDValue LowerVSETCC(SDValue Op, const X86Subtarget &Subtarget,
     // In this case use SSE compare
     bool UseAVX512Inst =
       (OpVT.is512BitVector() ||
-       OpVT.getScalarSizeInBits() >= 32 ||
-       (Subtarget.hasBWI() && Subtarget.hasVLX()));
+       OpVT.getScalarSizeInBits() >= 32);
 
     if (UseAVX512Inst)
       return LowerIntVSETCC_AVX512(Op, DAG);
@@ -31815,8 +31814,7 @@ static SDValue combineSelect(SDNode *N, SelectionDAG &DAG,
       CondVT.getVectorElementType() == MVT::i1 &&
       (VT.is128BitVector() || VT.is256BitVector()) &&
       (VT.getVectorElementType() == MVT::i8 ||
-       VT.getVectorElementType() == MVT::i16) &&
-      !(Subtarget.hasBWI() && Subtarget.hasVLX())) {
+       VT.getVectorElementType() == MVT::i16)) {
     Cond = DAG.getNode(ISD::SIGN_EXTEND, DL, VT, Cond);
     DCI.AddToWorklist(Cond.getNode());
     return DAG.getNode(N->getOpcode(), DL, VT, Cond, LHS, RHS);
