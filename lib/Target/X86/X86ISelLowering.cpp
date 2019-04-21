@@ -24753,6 +24753,16 @@ static SDValue LowerScalarVariableShift(SDValue Op, SelectionDAG &DAG,
 
   if (SDValue BaseShAmt = GetSplatValue(Amt, dl, DAG)) {
     if (SupportedVectorShiftWithBaseAmnt(VT, Subtarget, Opcode)) {
+      if (SupportedVectorVarShift(VT, Subtarget, Opcode)) {
+        // Avoid vector-scalar shift in some cases (TODO).
+        unsigned AmtOp = Amt.getOpcode();
+        switch (AmtOp) {
+        case ISD::ADD:
+        case ISD::SUB:
+        case ISD::AND:
+          return SDValue();
+        }
+      }
       MVT EltVT = VT.getVectorElementType();
       assert(EltVT.bitsLE(MVT::i64) && "Unexpected element type!");
       if (EltVT != MVT::i64 && EltVT.bitsGT(MVT::i32))
